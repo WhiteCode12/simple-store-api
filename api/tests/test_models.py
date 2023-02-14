@@ -12,7 +12,19 @@ class ModelTests(TestCase):
     def test_create_location(self):
         """Test creating a location is successful."""
         location = models.Location.objects.create(
-            name ='TestLocation'
+            name ='TestLocation',
         )
 
         self.assertEqual(str(location), location.name)
+    
+    def test_create_item(self):
+        """Test creating a item is successful."""
+        location = models.Location.objects.create(
+            name='TestLocation',
+        )
+        item = models.Item.objects.create(
+            itemLocation=location,
+            name='TestItem',
+        )
+
+        self.assertEqual(str(item), item.name)
