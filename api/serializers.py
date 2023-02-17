@@ -14,3 +14,12 @@ class LocationSerializer(serializers.ModelSerializer):
         model = Location
         fields = '__all__'
         read_only_fields = ['id']
+
+
+class ItemSerializer(serializers.ModelSerializer):
+    """Serializer for items."""
+
+    class Meta:
+        model = Item
+        fields = ['id', 'name', 'itemLocation']
+        read_only_fields = ['id']

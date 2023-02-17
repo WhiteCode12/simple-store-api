@@ -2,8 +2,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
-from .serializers import LocationSerializer
-from .models import Location
+from .serializers import LocationSerializer, ItemSerializer
+from .models import Location, Item
 
 
 @api_view(['GET'])
@@ -41,3 +41,11 @@ def deleteLocation(request, pk):
     location.delete()
 
     return Response('Location was deleted!')
+
+
+@api_view(['GET'])
+def getItems(request):
+    items = Item.objects.all().order_by('-id')
+    serializer = ItemSerializer(items, many=True)
+
+    return Response(serializer.data)
